@@ -3340,8 +3340,17 @@ END:VCARD`
   }
   break;
 }
-
-
+  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
+    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
+        const isReact = !!msg.message.reactionMessage; 
+        if (!isReact) {
+            try {
+                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍂', key: msg.key } });
+            } catch (error) {
+               // error handling
+            }
+        }
+    }
 // ==================== OWNER MENU ====================
 case 'owner': {
   try { await socket.sendMessage(sender, { react: { text: "👑", key: msg.key } }); } catch(e){}
@@ -3402,18 +3411,6 @@ END:VCARD`
   }
   break;
 }
-  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
-    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
-        const isReact = !!msg.message.reactionMessage; 
-        if (!isReact) {
-            try {
-                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍂', key: msg.key } });
-            } catch (error) {
-               // error handling
-            }
-        }
-    }
-    // ---------------------------------------------------------------------
 
 case 'google':
 case 'gsearch':
