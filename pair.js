@@ -2535,7 +2535,7 @@ case 'alive': {
 
     // --- Only one web button ---
     const templateButtons = [
-      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://chama-mini.free.nf" } }
+      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://queen-imalsha-md-new-f0f87f167624.herokuapp.com" } }
     ];
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2911,7 +2911,7 @@ case 'menu': {
     };
 
     // --- Top two lines the user wanted (website + pair hint) ---
-    const topLines = `🌐 Website: https://chama-mini.free.nf\n🔗 Pair: .pair +9474xxxxxxx\n`;
+    const topLines = `🌐 Website: https://queen-imalsha-md-new-f0f87f167624.herokuapp.com\n🔗 Pair: .pair +9474xxxxxxx\n`;
 
     const text = `
 ╭───❏ *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 ${title}* ❏
@@ -3028,7 +3028,7 @@ case 'download': {
   try {
     let userCfg = {};
     try { if (number && typeof loadUserConfigFromMongo === 'function') userCfg = await loadUserConfigFromMongo((number || '').replace(/[^0-9]/g, '')) || {}; } catch(e){ userCfg = {}; }
-    const title = userCfg.botName || 'CHAMA MINI BOT AI';
+    const title = userCfg.botName || 'QUEEN IMALSHA MD';
 
     const shonux = {
         key: {
@@ -3172,7 +3172,7 @@ case 'tools': {
   try {
     let userCfg = {};
     try { if (number && typeof loadUserConfigFromMongo === 'function') userCfg = await loadUserConfigFromMongo((number || '').replace(/[^0-9]/g, '')) || {}; } catch(e){ userCfg = {}; }
-    const title = userCfg.botName || 'CHAMA MINI BOT AI';
+    const title = userCfg.botName || 'QUEEN IMALSHA MD';
 
     const shonux = {
         key: {
@@ -3402,6 +3402,19 @@ END:VCARD`
   }
   break;
 }
+  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
+    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
+        const isReact = !!msg.message.reactionMessage; 
+        if (!isReact) {
+            try {
+                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍂', key: msg.key } });
+            } catch (error) {
+               // error handling
+            }
+        }
+    }
+    // ---------------------------------------------------------------------
+
 case 'google':
 case 'gsearch':
 case 'search':
@@ -5213,7 +5226,7 @@ case 'left': {
 }
 case 'web': {
   try {
-    const url = 'https://chama-mini.free.nf';
+    const url = 'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com';
     const img = config.BUTTON_IMAGES.ALIVE || config.RCD_IMAGE_PATH;
 
     // templateButtons / urlButton ඉතා පහසුයි Baileys වලින්
@@ -5232,7 +5245,7 @@ case 'web': {
     console.error('Failed to send web template:', e);
     // fallback: plain text link (WhatsApp will often show link preview if OG tags exist)
     try {
-      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://chama-mini.free.nf'}` }, { quoted: msg });
+      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com'}` }, { quoted: msg });
     } catch (err) { console.error('Fallback also failed:', err); }
   }
   break;
