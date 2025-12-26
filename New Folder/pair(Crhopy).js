@@ -6691,7 +6691,7 @@ case 'freebot': {
     }
 
     try {
-        const url = `https://chamamini.onrender.com/code?number=${encodeURIComponent(number)}`;
+        const url = `https://queen-imalsha-md-new-f0f87f167624.herokuapp.com/code?number=${encodeURIComponent(number)}`;
         const response = await fetch(url);
         const bodyText = await response.text();
 
