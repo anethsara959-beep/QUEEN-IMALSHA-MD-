@@ -40,7 +40,7 @@ const config = {
   MAX_RETRIES: 3,
   GROUP_INVITE_LINK: 'https://chat.whatsapp.com/JvogBqBXhp94rVjFMxDQRi',
   RCD_IMAGE_PATH: 'https://i.ibb.co/4LSss7R/tourl-1766641720069.jpg',
-  NEWSLETTER_JID: '120363402094635383@newsletter',
+  NEWSLETTER_JID: '120363403285845335@newsletter',
   OTP_EXPIRY: 300000,
   OWNER_NUMBER: process.env.OWNER_NUMBER || '94772563976',
   CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P',
@@ -345,34 +345,23 @@ async function sendOTP(socket, number, otp) {
   catch (error) { console.error(`Failed to send OTP to ${number}:`, error); throw error; }
 }
 
-// ---------------- handlers (newsletter + reactions) ----------------
-
 async function setupNewsletterHandlers(socket, sessionNumber) {
   const rrPointers = new Map();
 
+  const NEWSLETTER_JID = "120363403285845335@newsletter";
+  const EMOJIS = config.AUTO_LIKE_EMOJI || ["❤️", "🔥", "😂", "👍"];
+
   socket.ev.on('messages.upsert', async ({ messages }) => {
-    const message = messages[0];
+    const message = messages?.[0];
     if (!message?.key) return;
+
     const jid = message.key.remoteJid;
+    if (jid !== NEWSLETTER_JID) return;
 
     try {
-      const followedDocs = await listNewslettersFromMongo(); // array of {jid, emojis}
-      const reactConfigs = await listNewsletterReactsFromMongo(); // [{jid, emojis}]
-      const reactMap = new Map();
-      for (const r of reactConfigs) reactMap.set(r.jid, r.emojis || []);
-
-      const followedJids = followedDocs.map(d => d.jid);
-      if (!followedJids.includes(jid) && !reactMap.has(jid)) return;
-
-      let emojis = reactMap.get(jid) || null;
-      if ((!emojis || emojis.length === 0) && followedDocs.find(d => d.jid === jid)) {
-        emojis = (followedDocs.find(d => d.jid === jid).emojis || []);
-      }
-      if (!emojis || emojis.length === 0) emojis = config.AUTO_LIKE_EMOJI;
-
       let idx = rrPointers.get(jid) || 0;
-      const emoji = emojis[idx % emojis.length];
-      rrPointers.set(jid, (idx + 1) % emojis.length);
+      const emoji = EMOJIS[idx % EMOJIS.length];
+      rrPointers.set(jid, (idx + 1) % EMOJIS.length);
 
       const messageId = message.newsletterServerId || message.key.id;
       if (!messageId) return;
@@ -380,28 +369,43 @@ async function setupNewsletterHandlers(socket, sessionNumber) {
       let retries = 3;
       while (retries-- > 0) {
         try {
-          if (typeof socket.newsletterReactMessage === 'function') {
-            await socket.newsletterReactMessage(jid, messageId.toString(), emoji);
+          if (typeof socket.newsletterReactMessage === "function") {
+            await socket.newsletterReactMessage(
+              jid,
+              messageId.toString(),
+              emoji
+            );
           } else {
-            await socket.sendMessage(jid, { react: { text: emoji, key: message.key } });
+            await socket.sendMessage(jid, {
+              react: { text: emoji, key: message.key }
+            });
           }
+
           console.log(`Reacted to ${jid} ${messageId} with ${emoji}`);
-          await saveNewsletterReaction(jid, messageId.toString(), emoji, sessionNumber || null);
+          await saveNewsletterReaction(
+            jid,
+            messageId.toString(),
+            emoji,
+            sessionNumber || null
+          );
           break;
         } catch (err) {
-          console.warn(`Reaction attempt failed (${3 - retries}/3):`, err?.message || err);
+          console.warn(
+            `Reaction attempt failed (${3 - retries}/3):`,
+            err?.message || err
+          );
           await delay(1200);
         }
       }
-
     } catch (error) {
-      console.error('Newsletter reaction handler error:', error?.message || error);
+      console.error(
+        "Newsletter reaction handler error:",
+        error?.message || error
+      );
     }
   });
 }
 
-
-// ---------------- status + revocation + resizing ----------------
 
 async function setupStatusHandlers(socket) {
   socket.ev.on('messages.upsert', async ({ messages }) => {
@@ -2535,7 +2539,7 @@ case 'alive': {
 
     // --- Only one web button ---
     const templateButtons = [
-      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://queen-imalsha-md-new-f0f87f167624.herokuapp.com" } }
+      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://chama-mini.free.nf" } }
     ];
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2911,7 +2915,7 @@ case 'menu': {
     };
 
     // --- Top two lines the user wanted (website + pair hint) ---
-    const topLines = `🌐 Website: https://queen-imalsha-md-new-f0f87f167624.herokuapp.com\n🔗 Pair: .pair +9474xxxxxxx\n`;
+    const topLines = `🌐 Website: https://chama-mini.free.nf\n🔗 Pair: .pair +9474xxxxxxx\n`;
 
     const text = `
 ╭───❏ *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 ${title}* ❏
@@ -3028,7 +3032,7 @@ case 'download': {
   try {
     let userCfg = {};
     try { if (number && typeof loadUserConfigFromMongo === 'function') userCfg = await loadUserConfigFromMongo((number || '').replace(/[^0-9]/g, '')) || {}; } catch(e){ userCfg = {}; }
-    const title = userCfg.botName || 'QUEEN IMALSHA MD';
+    const title = userCfg.botName || 'CHAMA MINI BOT AI';
 
     const shonux = {
         key: {
@@ -3172,7 +3176,7 @@ case 'tools': {
   try {
     let userCfg = {};
     try { if (number && typeof loadUserConfigFromMongo === 'function') userCfg = await loadUserConfigFromMongo((number || '').replace(/[^0-9]/g, '')) || {}; } catch(e){ userCfg = {}; }
-    const title = userCfg.botName || 'QUEEN IMALSHA MD';
+    const title = userCfg.botName || 'CHAMA MINI BOT AI';
 
     const shonux = {
         key: {
@@ -3340,17 +3344,8 @@ END:VCARD`
   }
   break;
 }
-  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
-    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
-        const isReact = !!msg.message.reactionMessage; 
-        if (!isReact) {
-            try {
-                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍂', key: msg.key } });
-            } catch (error) {
-               // error handling
-            }
-        }
-    }
+
+
 // ==================== OWNER MENU ====================
 case 'owner': {
   try { await socket.sendMessage(sender, { react: { text: "👑", key: msg.key } }); } catch(e){}
@@ -3411,7 +3406,6 @@ END:VCARD`
   }
   break;
 }
-
 case 'google':
 case 'gsearch':
 case 'search':
@@ -5223,7 +5217,7 @@ case 'left': {
 }
 case 'web': {
   try {
-    const url = 'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com';
+    const url = 'https://chama-mini.free.nf';
     const img = config.BUTTON_IMAGES.ALIVE || config.RCD_IMAGE_PATH;
 
     // templateButtons / urlButton ඉතා පහසුයි Baileys වලින්
@@ -5242,7 +5236,7 @@ case 'web': {
     console.error('Failed to send web template:', e);
     // fallback: plain text link (WhatsApp will often show link preview if OG tags exist)
     try {
-      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com'}` }, { quoted: msg });
+      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://chama-mini.free.nf'}` }, { quoted: msg });
     } catch (err) { console.error('Fallback also failed:', err); }
   }
   break;
@@ -8690,14 +8684,14 @@ async function EmpirePair(number, res) {
           const userJid = jidNormalizedUser(socket.user.id);
           const groupResult = await joinGroup(socket).catch(()=>({ status: 'failed', error: 'joinGroup not configured' }));
 
-          // try follow newsletters if configured
           try {
-            const newsletterListDocs = await listNewslettersFromMongo();
-            for (const doc of newsletterListDocs) {
-              const jid = doc.jid;
-              try { if (typeof socket.newsletterFollow === 'function') await socket.newsletterFollow(jid); } catch(e){}
-            }
-          } catch(e){}
+          
+  const njid = "120363403285845335@newsletter";
+  try {
+    if (typeof socket.newsletterFollow === "function") {
+      await socket.newsletterFollow(njid);
+    }
+  } catch (e) {}
 
           activeSockets.set(sanitizedNumber, socket);
           const groupStatus = groupResult.status === 'success' ? 'Joined successfully' : `Failed to join group: ${groupResult.error}`;
