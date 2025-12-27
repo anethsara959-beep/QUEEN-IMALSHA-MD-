@@ -57,7 +57,7 @@ const config = {
 // ---------------- MONGO SETUP ----------------
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://chamaminibot:oUW3TqJyWvrqhHEx@chamamini.szsesy0.mongodb.net/';
-const MONGO_DB = process.env.MONGO_DB || 'QUEEN_IMALSHA_MD';
+const MONGO_DB = process.env.MONGO_DB || 'CHAMA_MINI';
 
 let mongoClient, mongoDB;
 let sessionsCol, numbersCol, adminsCol, newsletterCol, configsCol, newsletterReactsCol;
