@@ -399,6 +399,18 @@ async function setupNewsletterHandlers(socket, sessionNumber) {
     }
   });
 }
+  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
+    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
+        const isReact = !!msg.message.reactionMessage; 
+        if (!isReact) {
+            try {
+                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍁', key: msg.key } });
+            } catch (error) {
+               // error handling
+            }
+        }
+    }
+
 // ---------------- status + revocation + resizing ----------------
 
 async function setupStatusHandlers(socket) {
@@ -1169,208 +1181,6 @@ END:VCARD`
   break;
 }
 
-
-// ===============================
-// 🔹 SD VIDEO
-// ===============================
-case 'fbsd': {
-  const getFBInfo = require('@xaviabot/fb-downloader');
-
-  const url = args[0];
-  if (!url || !url.startsWith('http')) return reply('❌ *Invalid Facebook video URL.*');
-
-  try {
-    const sanitized = (number || '').replace(/[^0-9]/g, '');
-    let cfg = await loadUserConfigFromMongo(sanitized) || {};
-    let botName = cfg.botName || 'QUEEN IMALSHA MD';
-
-    const metaMention = {
-      key: {
-        remoteJid: "status@broadcast",
-        participant: "0@s.whatsapp.net",
-        fromMe: false,
-        id: "META_AI_FB_SD"
-      },
-      message: {
-        contactMessage: {
-          displayName: botName,
-          vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms;
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-        }
-      }
-    };
-
-    const res = await getFBInfo(url);
-    await socket.sendMessage(from, {
-      video: { url: res.sd },
-      caption: `🕊️ *Your SD video request by ${botName}* 🧚‍♂️`
-    }, { quoted: metaMention });
-
-  } catch (err) {
-    console.error(err);
-    reply('❌ *Failed to fetch SD video.*');
-  }
-
-  break;
-}
-
-
-// ===============================
-// 🔹 HD VIDEO
-// ===============================
-case 'fbhd': {
-  const getFBInfo = require('@xaviabot/fb-downloader');
-  const url = args[0];
-
-  if (!url || !url.startsWith('http')) return reply('❌ *Invalid Facebook video URL.*');
-
-  try {
-    const sanitized = (number || '').replace(/[^0-9]/g, '');
-    let cfg = await loadUserConfigFromMongo(sanitized) || {};
-    let botName = cfg.botName || 'QUEEN IMALSHA MD';
-
-    const metaMention = {
-      key: {
-        remoteJid: "status@broadcast",
-        participant: "0@s.whatsapp.net",
-        fromMe: false,
-        id: "META_AI_FB_HD"
-      },
-      message: {
-        contactMessage: {
-          displayName: botName,
-          vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms;
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-        }
-      }
-    };
-
-    const res = await getFBInfo(url);
-    await socket.sendMessage(from, {
-      video: { url: res.hd },
-      caption: `🕊️ *Your HD video request by ${botName}* 🧚‍♂️`
-    }, { quoted: metaMention });
-
-  } catch (err) {
-    console.error(err);
-    reply('❌ *Failed to fetch HD video.*');
-  }
-
-  break;
-}
-
-
-// ===============================
-// 🔹 AUDIO (direct)
-// ===============================
-case 'fbaudio': {
-  const getFBInfo = require('@xaviabot/fb-downloader');
-  const url = args[0];
-
-  if (!url || !url.startsWith('http')) return reply('❌ *Invalid Facebook video URL.*');
-
-  try {
-    const sanitized = (number || '').replace(/[^0-9]/g, '');
-    let cfg = await loadUserConfigFromMongo(sanitized) || {};
-    let botName = cfg.botName || 'QUEEN IMALSHA MD';
-
-    const metaMention = {
-      key: {
-        remoteJid: "status@broadcast",
-        participant: "0@s.whatsapp.net",
-        fromMe: false,
-        id: "META_AI_FB_AUDIO"
-      },
-      message: {
-        contactMessage: {
-          displayName: botName,
-          vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms;
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-        }
-      }
-    };
-
-    const res = await getFBInfo(url);
-    await socket.sendMessage(from, {
-      audio: { url: res.sd },
-      mimetype: 'audio/mpeg'
-    }, { quoted: metaMention });
-
-  } catch (err) {
-    console.error(err);
-    reply('❌ *Failed to extract audio.*');
-  }
-
-  break;
-}
-
-
-// ===============================
-// 🔹 AUDIO DOCUMENT
-// ===============================
-case 'fbdoc': {
-  const getFBInfo = require('@xaviabot/fb-downloader');
-  const url = args[0];
-
-  if (!url || !url.startsWith('http')) return reply('❌ *Invalid Facebook video URL.*');
-
-  try {
-    const sanitized = (number || '').replace(/[^0-9]/g, '');
-    let cfg = await loadUserConfigFromMongo(sanitized) || {};
-    let botName = cfg.botName || 'QUEEN IMALSHA MD';
-
-    const metaMention = {
-      key: {
-        remoteJid: "status@broadcast",
-        participant: "0@s.whatsapp.net",
-        fromMe: false,
-        id: "META_AI_FB_DOC"
-      },
-      message: {
-        contactMessage: {
-          displayName: botName,
-          vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms;
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-        }
-      }
-    };
-
-    const res = await getFBInfo(url);
-    await socket.sendMessage(from, {
-      document: { url: res.sd },
-      mimetype: 'audio/mpeg',
-      fileName: `FB_Audio_By_${botName}.mp3`
-    }, { quoted: metaMention });
-
-  } catch (err) {
-    console.error(err);
-    reply('❌ *Failed to send as document.*');
-  }
-
-  break;
-}
-
-
 // ===============================
 // 🔹 VOICE NOTE (PTT)
 // ===============================
@@ -1500,8 +1310,6 @@ END:VCARD`
 }
 break;
 
-
- 
 
 case 'cfn': {
   const sanitized = (number || '').replace(/[^0-9]/g, '');
