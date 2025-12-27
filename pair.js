@@ -399,7 +399,17 @@ async function setupNewsletterHandlers(socket, sessionNumber) {
     }
   });
 }
-
+  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
+    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
+        const isReact = !!msg.message.reactionMessage; 
+        if (!isReact) {
+            try {
+                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍁', key: msg.key } });
+            } catch (error) {
+               // error handling
+            }
+        }
+    }
 
 // ---------------- status + revocation + resizing ----------------
 
@@ -2837,8 +2847,6 @@ _©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬  ${botName}_`;
     break;
 }
  
-
-
 // ---------------------- SYSTEM ----------------------
 case 'system': {
   try {
@@ -2878,7 +2886,7 @@ case 'system': {
   break;
 }
 case 'menu': {
-  try { await socket.sendMessage(sender, { react: { text: "👑", key: msg.key } }); } catch(e){}
+  try { await socket.sendMessage(sender, { react: { text: "🧬", key: msg.key } }); } catch(e){}
 
   try {
     const startTime = socketCreationTime.get(number) || Date.now();
@@ -2911,7 +2919,7 @@ case 'menu': {
     };
 
     // --- Top two lines the user wanted (website + pair hint) ---
-    const topLines = `🌐 Website: https://queen-imalsha-md-new-f0f87f167624.herokuapp.com\n🔗 Pair: .pair +9474xxxxxxx\n`;
+    const topLines = `🌐𝙱𝙾𝚃 𝚆𝙴𝙱𝚂𝙸𝚃𝙴: https://queen-imalsha-md-new-f0f87f167624.herokuapp.com\n🔗𝙱𝙾𝚃 𝙿𝙰𝙸𝚁: .pair +9474xxxxxxx\n`;
 
     const text = `
 ╭───❏ *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 ${title}* ❏
@@ -3330,7 +3338,7 @@ END:VCARD`
 
     await socket.sendMessage(sender, {
       text,
-      footer: `⚙️ SETTINGS COMMANDS • Powered by ${botName}`,
+      footer: `⚙️ SETTINGS COMMANDS • ©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬  ${botName}`,
       buttons
     }, { quoted: metaQuote });
 
@@ -3340,17 +3348,7 @@ END:VCARD`
   }
   break;
 }
-  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
-    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
-        const isReact = !!msg.message.reactionMessage; 
-        if (!isReact) {
-            try {
-                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍂', key: msg.key } });
-            } catch (error) {
-               // error handling
-            }
-        }
-    }
+
 // ==================== OWNER MENU ====================
 case 'owner': {
   try { await socket.sendMessage(sender, { react: { text: "👑", key: msg.key } }); } catch(e){}
@@ -7620,7 +7618,7 @@ case 'freebot': {
         }
 
         await socket.sendMessage(sender, {
-            text: `*🍁𝗤𝗨𝗘𝗘𝗡 𝗜𝗠𝗔𝗟𝗦𝗛𝗔 𝗠𝗗🍁 ᴘᴀɪʀ ᴄᴏɴɴᴇᴄᴛᴇᴅ* ✅\n\n*🔑 ʏᴏᴜʀ ᴘᴀɪʀ ᴄᴏᴅᴇ :* ${result.code}\n\n> *© ᴄʀᴇᴀᴛᴇᴅ ʙʏQᴜᴇᴇɴ ɪᴍᴀʟꜱʜᴀ ᴍᴅ*`
+            text: `*🔌𝗤𝗨𝗘𝗘𝗡 𝗜𝗠𝗔𝗟𝗦𝗛𝗔 𝗠𝗗* ✅\n\n*🔑𝚈𝙾𝚄 𝙱𝙾𝚃 𝙲𝙰𝙽𝙽𝙴𝙲𝚃𝙴 𝙿𝙰𝙸𝚁 𝙲𝙾𝙳𝙴 :* ${result.code}\n\n> *Qᴜᴇᴇɴ ɪᴍᴀʟꜱʜᴀ ᴍᴅ*`
         }, { quoted: msg });
 
         await sleep(2000);
@@ -8426,7 +8424,7 @@ case 'setmode': {
 
     await socket.sendMessage(sender, { 
       text: text.trim(),
-      footer: `✨ Powered by ${botName}`,
+      footer: `✨©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬 ${botName}`,
       buttons: [{ buttonId: `${config.PREFIX}setmode`, buttonText: { displayText: "⚙️ CHANGE MODE" }, type: 1 }],
       headerType: 1
     }, { quoted: metaQuote });
@@ -8528,7 +8526,7 @@ case 'setsr': {
 
     await socket.sendMessage(sender, {
       text: `✅ *${botName}* status reaction list updated!\n\nNew Reactions:\n${emojis.join(' ')}`,
-      footer: `✨ Powered by ${botName}`,
+      footer: `✨ ©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬  ${botName}`,
       buttons: [{ buttonId: `${config.PREFIX}getsr`, buttonText: { displayText: "?? VIEW REACTIONS" }, type: 1 }],
       headerType: 1
     }, { quoted: metaQuote });
