@@ -46,7 +46,7 @@ const config = {
   CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P',
   BOT_NAME: 'QUEEN IMALSHA MD',
   BOT_VERSION: '3.0.0V',
-  OWNER_NAME: 'old sanu xd owner',
+  OWNER_NAME: '𝙾𝙻𝙳 𝚂𝙰𝙽𝚄 𝚇𝙳 𝙾𝚆𝙽𝙴𝚁',
   IMAGE_PATH: 'https://i.ibb.co/4LSss7R/tourl-1766641720069.jpg',
   BOT_FOOTER: 'ꪜǫᴜᴇᴇɴ ꪻɪᴍᴀʟsʜᴀꪖ🧚‍♂️ᴍᴅ',
   BUTTON_IMAGES: { ALIVE: 'https://i.ibb.co/4LSss7R/tourl-1766641720069.jpg' },
@@ -2950,7 +2950,7 @@ case 'menu': {
 │❑│ ${config.PREFIX}alive
 │❑│
 │└─ꪶ✨̶̶̶̶̶̶𝗤𝗨𝗘𝗘𝗡 𝗜𝗠𝗔𝗟𝗦𝗛𝗔 𝗠𝗗✨
-└─────────────────❑
+╰─────────────────❑
 > © ${config.BOT_FOOTER || '𝗤𝗨𝗘𝗘𝗡-𝗜𝗠𝗔𝗟𝗦𝗛𝗔'}
 `.trim();
 
