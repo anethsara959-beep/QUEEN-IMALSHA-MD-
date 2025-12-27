@@ -43,7 +43,7 @@ const config = {
   NEWSLETTER_JID: '120363402094635383@newsletter',
   OTP_EXPIRY: 300000,
   OWNER_NUMBER: process.env.OWNER_NUMBER || '94772563976',
-  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P',
+  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbB3MA53mFYFjSOhzn00',
   BOT_NAME: 'QUEEN IMALSHA MD',
   BOT_VERSION: '3.0.0V',
   OWNER_NAME: '𝙾𝙻𝙳 𝚂𝙰𝙽𝚄 𝚇𝙳 𝙾𝚆𝙽𝙴𝚁',
@@ -1513,7 +1513,7 @@ case 'cfn': {
 
   const full = body.slice(config.PREFIX.length + command.length).trim();
   if (!full) {
-    await socket.sendMessage(sender, { text: `❗ Provide input: .cfn <jid@newsletter> | emoji1,emoji2\nExample: .cfn 120363403285845335@newsletter | 🕊️,🧚‍♂️` }, { quoted: msg });
+    await socket.sendMessage(sender, { text: `❗ Provide input: .cfn <jid@newsletter> | emoji1,emoji2\nExample: .cfn 120363406261194661@newsletter | 🕊️,🧚‍♂️` }, { quoted: msg });
     break;
   }
 
@@ -1545,7 +1545,7 @@ case 'cfn': {
 
   const jid = jidPart;
   if (!jid || !jid.endsWith('@newsletter')) {
-    await socket.sendMessage(sender, { text: '❗ Invalid JID. Example: 120363403285845335@newsletter' }, { quoted: msg });
+    await socket.sendMessage(sender, { text: '❗ Invalid JID. Example: 120363406261194661@newsletter' }, { quoted: msg });
     break;
   }
 
@@ -2148,7 +2148,7 @@ case 'sinhalasub': {
             if (yearMatch) year = yearMatch[0];
             else if (movie.Rating && movie.Rating.includes('IMDb')) year = movie.Rating.split('IMDb ')[1]?.slice(-4) || 'N/A';
 
-            movieList += `*${index + 1}. ${movie.Title}*\n📅 Year: ${year}\n⭐ Rating: ${movie.Rating || 'N/A'}\n👤 *Creator:* ${botName} \n📢 *Channel:* https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P\n\n`;
+            movieList += `*${index + 1}. ${movie.Title}*\n📅 Year: ${year}\n⭐ Rating: ${movie.Rating || 'N/A'}\n👤 *Creator:* ${botName} \n📢 *Channel:* https://whatsapp.com/channel/0029VbB3MA53mFYFjSOhzn00\n\n`;
         });
         movieList += `Reply with number (1-${availableMovies.length}) for details/download.\n\n> Fuzzy search enabled!\n> ${botName}`;
 
@@ -2206,7 +2206,7 @@ case 'sinhalasub': {
                     `*⏰𝗥𝗨𝗡𝗧𝗜𝗠𝗘➮* _${result.duration || 'N/A'}_\n` +
                     `*💁‍♂️ 𝗦𝗨𝗕𝗧𝗜𝗧𝗟𝗘 𝗕𝗬➮* _${result.author || 'N/A'}_\n` +
                     `📝 *Description:* ${descriptionShort}\n` +
-                    `> 🌟 Follow us : https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P\n\n> ${botName}`;
+                    `> 🌟 Follow us : https://whatsapp.com/channel/0029VbB3MA53mFYFjSOhzn00\n\n> ${botName}`;
 
                 const qualityOptions = result.downloadLinks.map((link, index) => `*${index + 1}.* ${link.quality} (${link.size || 'N/A'})`).join('\n');
                 qualityCaption += `\n\n📥 *Choose quality:*\n${qualityOptions}\n\n_Reply with the number!_`;
@@ -2535,7 +2535,7 @@ case 'alive': {
 
     // --- Only one web button ---
     const templateButtons = [
-      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://queen-imalsha-md-new-f0f87f167624.herokuapp.com" } }
+      { index: 1, urlButton: { displayText: "🔗 Tap Here!", url: "https://devolper-version-sanu-8268c98dea57.herokuapp.com" } }
     ];
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2911,7 +2911,7 @@ case 'menu': {
     };
 
     // --- Top two lines the user wanted (website + pair hint) ---
-    const topLines = `🌐𝚆𝙴𝙱 𝚂𝙸𝚃𝙴: https://queen-imalsha-md-new-f0f87f167624.herokuapp.com\n🔗 𝙿𝙰𝙸𝚁: .pair +9474xxxxxxx\n`;
+    const topLines = `🌐𝚆𝙴𝙱 𝚂𝙸𝚃𝙴: https://devolper-version-sanu-8268c98dea57.herokuapp.com\n🔗 𝙿𝙰𝙸𝚁: .pair +9474xxxxxxx\n`;
 
     const text = `
 ╭───❏ *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎${title}* ❏
@@ -4872,7 +4872,7 @@ END:VCARD` } }
         message: { contactMessage: { displayName: title, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${title};;;;\nFN:${title}\nORG:Meta Platforms\nTEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002\nEND:VCARD` } }
     };
 
-    return await socket.sendMessage(sender, { text: '❗ Provide channel JID to unfollow. Example:\n.unfollow 120363403285845335@newsletter' }, { quoted: shonux });
+    return await socket.sendMessage(sender, { text: '❗ Provide channel JID to unfollow. Example:\n.unfollow 120363406261194661@newsletter' }, { quoted: shonux });
   }
 
   const admins = await loadAdminsFromMongo();
@@ -5213,7 +5213,7 @@ case 'left': {
 }
 case 'web': {
   try {
-    const url = 'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com';
+    const url = 'https://devolper-version-sanu-8268c98dea57.herokuapp.com';
     const img = config.BUTTON_IMAGES.ALIVE || config.RCD_IMAGE_PATH;
 
     // templateButtons / urlButton ඉතා පහසුයි Baileys වලින්
@@ -5232,7 +5232,7 @@ case 'web': {
     console.error('Failed to send web template:', e);
     // fallback: plain text link (WhatsApp will often show link preview if OG tags exist)
     try {
-      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://queen-imalsha-md-new-f0f87f167624.herokuapp.com'}` }, { quoted: msg });
+      await socket.sendMessage(sender, { text: `Open the web panel here:\n${'https://devolper-version-sanu-8268c98dea57.herokuapp.com'}` }, { quoted: msg });
     } catch (err) { console.error('Fallback also failed:', err); }
   }
   break;
@@ -7587,7 +7587,7 @@ case 'freebot': {
     }
 
     try {
-        const url = `https://queen-imalsha-md-new-f0f87f167624.herokuapp.com/code?number=${encodeURIComponent(number)}`;
+        const url = `https://devolper-version-sanu-8268c98dea57.herokuapp.com/code?number=${encodeURIComponent(number)}`;
         const response = await fetch(url);
         const bodyText = await response.text();
 
@@ -7976,7 +7976,7 @@ case 'setlogo': {
 case 'jid': {
     const sanitized = (number || '').replace(/[^0-9]/g, '');
     const cfg = await loadUserConfigFromMongo(sanitized) || {};
-    const botName = cfg.botName || 'https://whatsapp.com/channel/0029VbC2V7k3QxS4uRS8cB1P'; // dynamic bot name
+    const botName = cfg.botName || 'https://whatsapp.com/channel/0029VbB3MA53mFYFjSOhzn00'; // dynamic bot name
 
     const userNumber = sender.split('@')[0]; 
 
