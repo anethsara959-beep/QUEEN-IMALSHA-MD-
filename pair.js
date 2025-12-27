@@ -399,18 +399,6 @@ async function setupNewsletterHandlers(socket, sessionNumber) {
     }
   });
 }
-  // ----------- ✅ CUSTOM REACT LOGIC (Updated for 2 numbers) -----------
-    if (senderNumber.includes('94772563976') || senderNumber.includes('94760254921')) {
-        const isReact = !!msg.message.reactionMessage; 
-        if (!isReact) {
-            try {
-                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍁', key: msg.key } });
-            } catch (error) {
-               // error handling
-            }
-        }
-    }
-
 // ---------------- status + revocation + resizing ----------------
 
 async function setupStatusHandlers(socket) {
