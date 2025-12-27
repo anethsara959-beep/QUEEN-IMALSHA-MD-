@@ -3330,7 +3330,7 @@ END:VCARD`
 
     await socket.sendMessage(sender, {
       text,
-      footer: `⚙️ SETTINGS COMMANDS • Powered by ${botName}`,
+      footer: `⚙️ SETTINGS COMMANDS • ©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬 ${botName}`,
       buttons
     }, { quoted: metaQuote });
 
@@ -8416,7 +8416,7 @@ case 'setmode': {
 
     await socket.sendMessage(sender, { 
       text: text.trim(),
-      footer: `✨ Powered by ${botName}`,
+      footer: `©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬 ${botName}`,
       buttons: [{ buttonId: `${config.PREFIX}setmode`, buttonText: { displayText: "⚙️ CHANGE MODE" }, type: 1 }],
       headerType: 1
     }, { quoted: metaQuote });
@@ -8518,7 +8518,7 @@ case 'setsr': {
 
     await socket.sendMessage(sender, {
       text: `✅ *${botName}* status reaction list updated!\n\nNew Reactions:\n${emojis.join(' ')}`,
-      footer: `✨ Powered by ${botName}`,
+      footer: `©𝗣𝗢𝗪𝗘𝗥𝗗 𝗕𝗬 ${botName}`,
       buttons: [{ buttonId: `${config.PREFIX}getsr`, buttonText: { displayText: "?? VIEW REACTIONS" }, type: 1 }],
       headerType: 1
     }, { quoted: metaQuote });
@@ -8698,7 +8698,7 @@ async function EmpirePair(number, res) {
           const useLogo = userConfig.logo || config.RCD_IMAGE_PATH;
 
           const initialCaption = formatMessage(useBotName,
-            `✅\n\n✅ Successfully connected!\n\n🔢 Number: ${sanitizedNumber}\n🕒 Connecting: Bot will become active in a few seconds`,
+            `✅\n\n🔌Successfully connected!\n\n🔢 Number: ${sanitizedNumber}\n⏳Connecting: Bot will become active in a few seconds`,
             useBotName
           );
 
@@ -8723,7 +8723,7 @@ async function EmpirePair(number, res) {
           await delay(4000);
 
           const updatedCaption = formatMessage(useBotName,
-            `✅\n\n✅ Successfully connected and ACTIVE!\n\n🔢 Number: ${sanitizedNumber}\n🩵 🕒 Connected at: ${getSriLankaTimestamp()}`,
+            `✅\n\n🔌Successfully connected and ACTIVE!\n\n🔢 Number: ${sanitizedNumber}\n⏳ Connected at: ${getSriLankaTimestamp()}`,
             useBotName
           );
 
